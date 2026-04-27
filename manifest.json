@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "Nullify",
+  "version": "0.3.0",
+  "description": "Tinder-style message triage for MS Teams",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "declarativeNetRequest"
+  ],
+  "host_permissions": [
+    "https://teams.cloud.microsoft/*"
+  ],
+  "action": {
+    "default_title": "Nullify - Triage Messages"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://teams.cloud.microsoft/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "strip_frame_headers",
+        "enabled": true,
+        "path": "rules.json"
+      }
+    ]
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
